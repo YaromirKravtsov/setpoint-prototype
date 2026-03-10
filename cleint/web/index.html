@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Probestunden — Tennisschule Gorovits</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======================================================
+     NAVIGATION
+     ====================================================== -->
+<header class="site-header">
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <span class="logo-text">Tennisschule <strong>Gorovits</strong></span>
+    </a>
+    <nav class="main-nav">
+      <a href="#">Home</a>
+      <a href="#" class="active">Unser Stundenplan</a>
+      <a href="#">Unsere Leistungen</a>
+      <a href="#">Tennis-Shop</a>
+      <a href="#">Kontakt</a>
+    </nav>
+    <button class="nav-toggle" onclick="toggleMobileNav()" aria-label="Menü öffnen">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#" class="active">Unser Stundenplan</a>
+    <a href="#">Unsere Leistungen</a>
+    <a href="#">Tennis-Shop</a>
+    <a href="#">Kontakt</a>
+  </nav>
+</header>
+
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+<section class="hero">
+  <div class="hero-image">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1>Starte Deinen Probemonat</h1>
+        <p>
+          Entdecke unsere Trainingszeiten, wähle eine passende Einheit und plane Deinen Probemonat ganz einfach online.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+     ====================================================== -->
+<main class="main-content">
+  <div class="container">
+
+    <!-- FILTERS -->
+    <div class="filters">
+      <div class="filters-left">
+        <input type="date" value="2024-10-14" class="filter-input" aria-label="Datum">
+        <select class="filter-select" aria-label="Ort">
+          <option value="">Alle Orte</option>
+          <option>MTV Herrenhausen</option>
+          <option>PostSportVerein</option>
+          <option>Herrenhäuser Anlage</option>
+        </select>
+        <select class="filter-select" aria-label="Gruppe">
+          <option value="">Alle Gruppen</option>
+          <option>Kinder 5+</option>
+          <option>Kinder 1+</option>
+          <option>Junior</option>
+          <option>Erwachsene</option>
+        </select>
+      </div>
+      <button class="btn-filter">Anpassen</button>
+    </div>
+
+    <!-- SCHEDULE -->
+    <div class="schedule">
+
+      <!-- ---- MONTAG ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Montag</span>
+          <span class="day-date">14.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <div class="trainings-grid">
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">10:00 – 11:00</span>
+              <span class="group-badge erwachsen">Erwachsene</span>
+            </div>
+            <div class="card-group-name">Erwachsenentraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Erwachsene', 'Montag, 10:00–11:00', 'PostSportVerein', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">11:00 – 12:00</span>
+              <span class="group-badge kinder-1">Kinder 1+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 1 Jahr</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 1+', 'Montag, 11:00–12:00', 'MTV Herrenhausen', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">12:00 – 13:00</span>
+              <span class="group-badge kinder-5">Kinder 5+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 5 Jahren</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Max Müller
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 5+', 'Montag, 12:00–13:00', 'PostSportVerein', 'Max Müller')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">13:00 – 14:00</span>
+              <span class="group-badge junior">Junior</span>
+            </div>
+            <div class="card-group-name">Jugendtraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Junior', 'Montag, 13:00–14:00', 'PostSportVerein', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- DIENSTAG ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Dienstag</span>
+          <span class="day-date">15.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <div class="trainings-grid">
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">10:00 – 11:00</span>
+              <span class="group-badge erwachsen">Erwachsene</span>
+            </div>
+            <div class="card-group-name">Erwachsenentraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Erwachsene', 'Dienstag, 10:00–11:00', 'PostSportVerein', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">11:00 – 12:00</span>
+              <span class="group-badge kinder-1">Kinder 1+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 1 Jahr</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Max Müller
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 1+', 'Dienstag, 11:00–12:00', 'MTV Herrenhausen', 'Max Müller')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">12:00 – 13:00</span>
+              <span class="group-badge kinder-5">Kinder 5+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 5 Jahren</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 5+', 'Dienstag, 12:00–13:00', 'PostSportVerein', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">16:00 – 17:00</span>
+              <span class="group-badge junior">Junior</span>
+            </div>
+            <div class="card-group-name">Jugendtraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Herrenhäuser Anlage
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Junior', 'Dienstag, 16:00–17:00', 'Herrenhäuser Anlage', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- MITTWOCH ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Mittwoch</span>
+          <span class="day-date">16.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <div class="trainings-grid">
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">09:00 – 10:00</span>
+              <span class="group-badge erwachsen">Erwachsene</span>
+            </div>
+            <div class="card-group-name">Erwachsenentraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Erwachsene', 'Mittwoch, 09:00–10:00', 'MTV Herrenhausen', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">10:00 – 11:00</span>
+              <span class="group-badge kinder-1">Kinder 1+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 1 Jahr</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 1+', 'Mittwoch, 10:00–11:00', 'PostSportVerein', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">11:00 – 12:00</span>
+              <span class="group-badge kinder-5">Kinder 5+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 5 Jahren</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Max Müller
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 5+', 'Mittwoch, 11:00–12:00', 'MTV Herrenhausen', 'Max Müller')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">17:00 – 18:30</span>
+              <span class="group-badge junior">Junior</span>
+            </div>
+            <div class="card-group-name">Jugendtraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Herrenhäuser Anlage
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Junior', 'Mittwoch, 17:00–18:30', 'Herrenhäuser Anlage', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- DONNERSTAG ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Donnerstag</span>
+          <span class="day-date">17.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <div class="trainings-grid">
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">10:00 – 11:00</span>
+              <span class="group-badge erwachsen">Erwachsene</span>
+            </div>
+            <div class="card-group-name">Erwachsenentraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Erwachsene', 'Donnerstag, 10:00–11:00', 'PostSportVerein', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">15:00 – 16:00</span>
+              <span class="group-badge kinder-1">Kinder 1+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 1 Jahr</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Max Müller
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 1+', 'Donnerstag, 15:00–16:00', 'MTV Herrenhausen', 'Max Müller')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">16:00 – 17:00</span>
+              <span class="group-badge kinder-5">Kinder 5+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 5 Jahren</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 5+', 'Donnerstag, 16:00–17:00', 'MTV Herrenhausen', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- FREITAG ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Freitag</span>
+          <span class="day-date">18.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <div class="trainings-grid">
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">09:00 – 10:00</span>
+              <span class="group-badge erwachsen">Erwachsene</span>
+            </div>
+            <div class="card-group-name">Erwachsenentraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Herrenhäuser Anlage
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Erwachsene', 'Freitag, 09:00–10:00', 'Herrenhäuser Anlage', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">10:00 – 11:00</span>
+              <span class="group-badge kinder-1">Kinder 1+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 1 Jahr</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 1+', 'Freitag, 10:00–11:00', 'PostSportVerein', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">16:00 – 17:30</span>
+              <span class="group-badge junior">Junior</span>
+            </div>
+            <div class="card-group-name">Jugendtraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Max Müller
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Junior', 'Freitag, 16:00–17:30', 'MTV Herrenhausen', 'Max Müller')">Probemonat starten</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- SAMSTAG ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Samstag</span>
+          <span class="day-date">19.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <div class="trainings-grid">
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">09:00 – 10:00</span>
+              <span class="group-badge kinder-5">Kinder 5+</span>
+            </div>
+            <div class="card-group-name">Kindertraining ab 5 Jahren</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                MTV Herrenhausen
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Marianna Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Kinder 5+', 'Samstag, 09:00–10:00', 'MTV Herrenhausen', 'Marianna Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">10:00 – 11:30</span>
+              <span class="group-badge junior">Junior</span>
+            </div>
+            <div class="card-group-name">Jugendtraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Herrenhäuser Anlage
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Igor Gorovits
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Junior', 'Samstag, 10:00–11:30', 'Herrenhäuser Anlage', 'Igor Gorovits')">Probemonat starten</button>
+          </div>
+
+          <div class="training-card">
+            <div class="card-top">
+              <span class="card-time">11:00 – 12:00</span>
+              <span class="group-badge erwachsen">Erwachsene</span>
+            </div>
+            <div class="card-group-name">Erwachsenentraining</div>
+            <div class="card-meta">
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                PostSportVerein
+              </div>
+              <div class="card-meta-row">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Max Müller
+              </div>
+            </div>
+            <button class="btn-trial" onclick="openModal('Erwachsene', 'Samstag, 11:00–12:00', 'PostSportVerein', 'Max Müller')">Probemonat starten</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---- SONNTAG ---- -->
+      <div class="day-section">
+        <h2 class="day-header">
+          <span class="day-name">Sonntag</span>
+          <span class="day-date">20.10.24</span>
+          <span class="day-divider"></span>
+        </h2>
+        <p class="no-trainings">Kein Training geplant.</p>
+      </div>
+
+    </div><!-- /schedule -->
+  </div>
+</main>
+
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+<footer class="site-footer">
+  <p>
+    &copy; 2024 Tennisschule Gorovits · Hannover ·
+    <a href="#">Datenschutz</a> ·
+    <a href="#">Impressum</a>
+  </p>
+</footer>
+
+
+<!-- ======================================================
+     MODAL — PROBEMONAT BEANTRAGEN
+     ====================================================== -->
+<div class="modal-overlay" id="trialModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+
+    <div class="modal-header">
+      <div class="modal-header-text">
+        <h2 id="modalTitle">Probemonat beantragen</h2>
+        <p>Fülle das Formular aus — wir melden uns innerhalb von 24 Stunden.</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Schließen">&times;</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="modal-training-info" id="modalTrainingInfo">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span id="modalTrainingText">Gewähltes Training</span>
+      </div>
+
+      <form id="trialForm" onsubmit="handleSubmit(event)" novalidate>
+
+        <!-- 1. Spielerinformationen -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">1</span>
+            Spielerinformationen
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="firstName">Vorname *</label>
+              <input class="form-control" type="text" id="firstName" name="firstName" placeholder="Vorname" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lastName">Nachname *</label>
+              <input class="form-control" type="text" id="lastName" name="lastName" placeholder="Nachname" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="dob">Geburtsdatum *</label>
+              <input class="form-control" type="date" id="dob" name="dob" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Elternteil / Erziehungsberechtigte -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">2</span>
+            Elternteil / Erziehungsberechtigte
+            <span style="font-weight:400; color:var(--text-muted); text-transform:none; letter-spacing:0; font-size:12px;">(nur bei Kindern)</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="parentFirstName">Vorname <span class="optional">(optional)</span></label>
+              <input class="form-control" type="text" id="parentFirstName" name="parentFirstName" placeholder="Vorname">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="parentLastName">Nachname <span class="optional">(optional)</span></label>
+              <input class="form-control" type="text" id="parentLastName" name="parentLastName" placeholder="Nachname">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Anschrift -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">3</span>
+            Anschrift
+          </div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label class="form-label" for="street">Straße und Hausnummer *</label>
+              <input class="form-control" type="text" id="street" name="street" placeholder="z. B. Musterstraße 12" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="postalCode">Postleitzahl *</label>
+              <input class="form-control" type="text" id="postalCode" name="postalCode" placeholder="30419" maxlength="5" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="city">Ort *</label>
+              <input class="form-control" type="text" id="city" name="city" placeholder="Hannover" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Kontaktdaten -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">4</span>
+            Kontaktdaten
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="phone">Telefonnummer *</label>
+              <input class="form-control" type="tel" id="phone" name="phone" placeholder="+49 151 …" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">E-Mail-Adresse *</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="name@beispiel.de" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Tenniserfahrung -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">5</span>
+            Tenniserfahrung
+          </div>
+          <div class="options-grid cols-3">
+            <label class="option-item">
+              <input type="radio" name="experience" value="anfaenger" required>
+              <div><strong>Anfänger</strong><br><span style="font-size:12px; color:var(--text-muted);">Noch keine Erfahrung</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="experience" value="fortgeschritten">
+              <div><strong>Fortgeschritten</strong><br><span style="font-size:12px; color:var(--text-muted);">Grundkenntnisse vorhanden</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="experience" value="erfahren">
+              <div><strong>Erfahren</strong><br><span style="font-size:12px; color:var(--text-muted);">Regelmäßig gespielt</span></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 6. Trainingsart -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">6</span>
+            Gewünschte Trainingsart
+          </div>
+          <div class="options-grid">
+            <label class="option-item">
+              <input type="radio" name="trainingType" value="anfaenger-gruppe" required>
+              <div><strong>Anfängergruppe</strong><br><span style="font-size:12px; color:var(--text-muted);">4 Einheiten im Probemonat</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="trainingType" value="fortgeschritten-gruppe">
+              <div><strong>Fortgeschrittenengruppe</strong><br><span style="font-size:12px; color:var(--text-muted);">4 Einheiten im Probemonat</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="trainingType" value="erfahrene-gruppe">
+              <div><strong>Erfahrenengruppe</strong><br><span style="font-size:12px; color:var(--text-muted);">4 Einheiten im Probemonat</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="trainingType" value="einzeltraining">
+              <div><strong>Einzeltraining</strong><br><span style="font-size:12px; color:var(--text-muted);">Persönliches Coaching</span></div>
+            </label>
+            <label class="option-item wide">
+              <input type="radio" name="trainingType" value="gastspieler">
+              <div><strong>Gastspieler</strong><br><span style="font-size:12px; color:var(--text-muted);">Einzelne Einheit ohne Verpflichtung</span></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 7. Trainingsfrequenz -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">7</span>
+            Gewünschte Trainingsfrequenz
+          </div>
+          <div class="options-grid cols-3">
+            <label class="option-item">
+              <input type="radio" name="frequency" value="1x" required>
+              <div><strong>1× pro Woche</strong></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="frequency" value="2x">
+              <div><strong>2× pro Woche</strong></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="frequency" value="3x">
+              <div><strong>Mehr als 2× pro Woche</strong></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 8. Bevorzugte Trainingstage -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">8</span>
+            Bevorzugte Trainingstage
+          </div>
+          <div class="days-grid">
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="montag">Montag</label>
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="dienstag">Dienstag</label>
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="mittwoch">Mittwoch</label>
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="donnerstag">Donnerstag</label>
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="freitag">Freitag</label>
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="samstag">Samstag</label>
+            <label class="day-chip" onclick="toggleDayChip(this)"><input type="checkbox" name="days" value="sonntag">Sonntag</label>
+          </div>
+        </div>
+
+        <!-- 9. Bevorzugte Tageszeit -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">9</span>
+            Bevorzugte Tageszeit
+          </div>
+          <div class="options-grid cols-3">
+            <label class="option-item">
+              <input type="radio" name="timeOfDay" value="morgens" required>
+              <div><strong>Vormittags</strong><br><span style="font-size:12px; color:var(--text-muted);">08:00 – 12:00 Uhr</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="timeOfDay" value="nachmittags">
+              <div><strong>Nachmittags</strong><br><span style="font-size:12px; color:var(--text-muted);">12:00 – 17:00 Uhr</span></div>
+            </label>
+            <label class="option-item">
+              <input type="radio" name="timeOfDay" value="abends">
+              <div><strong>Abends</strong><br><span style="font-size:12px; color:var(--text-muted);">17:00 – 21:00 Uhr</span></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- 10. Zusatzoptionen -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">10</span>
+            Zusatzoptionen
+            <span style="font-weight:400; color:var(--text-muted); text-transform:none; letter-spacing:0; font-size:12px;">(optional)</span>
+          </div>
+          <div class="options-grid">
+            <label class="option-item">
+              <input type="checkbox" name="extras" value="racket-monthly">
+              <div><strong>Schlägermiete (monatlich)</strong><br><span style="font-size:12px; color:var(--text-muted);">Geeigneter Schläger für die Saison</span></div>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" name="extras" value="racket-session">
+              <div><strong>Schlägermiete (pro Einheit)</strong><br><span style="font-size:12px; color:var(--text-muted);">Ausleihe pro Trainingseinheit</span></div>
+            </label>
+            <label class="option-item">
+              <input type="checkbox" name="extras" value="starter-kids">
+              <div><strong>Starterpaket für Kinder</strong><br><span style="font-size:12px; color:var(--text-muted);">Schläger, Bälle &amp; T-Shirt</span></div>
+            </label>
+            <label class="option-item" onclick="toggleFriendField(this)">
+              <input type="checkbox" name="extras" value="friend-discount" id="friendDiscountCb">
+              <div><strong>Freunde-werben-Rabatt</strong><br><span style="font-size:12px; color:var(--text-muted);">Einen Freund als Werber angeben</span></div>
+            </label>
+          </div>
+          <div id="friendNameField" style="display:none; margin-top:12px;">
+            <label class="form-label" for="friendName">Name des Freundes <span class="optional">(optional)</span></label>
+            <input class="form-control" type="text" id="friendName" name="friendName" placeholder="Vor- und Nachname" style="margin-top:5px;">
+          </div>
+        </div>
+
+        <!-- 11. Bankverbindung (SEPA) -->
+        <div class="form-section">
+          <div class="form-section-title">
+            <span class="section-num">11</span>
+            Bankverbindung (SEPA-Lastschrift)
+          </div>
+          <div class="sepa-note">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>Deine Bankdaten werden sicher übertragen und ausschließlich für den Monatsbeitrag verwendet. Die SEPA-Lastschrift gilt erst ab regulärem Mitgliedschaftsbeginn nach dem Probemonat.</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label class="form-label" for="accountHolder">Kontoinhaber *</label>
+              <input class="form-control" type="text" id="accountHolder" name="accountHolder" placeholder="Vor- und Nachname" required>
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="iban">IBAN *</label>
+              <input class="form-control" type="text" id="iban" name="iban" placeholder="DE00 0000 0000 0000 0000 00" maxlength="27" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="bic">BIC <span class="optional">(optional)</span></label>
+              <input class="form-control" type="text" id="bic" name="bic" placeholder="z. B. SSKMDEMMXXX">
+            </div>
+          </div>
+          <div class="consent-block" style="margin-top:14px;">
+            <label class="consent-item">
+              <input type="checkbox" name="sepaMandate" id="sepaMandate" required>
+              <span>
+                Ich erteile der Tennisschule Gorovits ein SEPA-Lastschriftmandat und ermächtige sie, fällige Beträge
+                von meinem Konto einzuziehen. Mein Kreditinstitut kann Lastschriften zurückbuchen, sofern das Konto
+                nicht ausreichend gedeckt ist. <strong>Die Bankverbindung wird erst nach dem Probemonat aktiv.</strong>
+              </span>
+            </label>
+          </div>
+        </div>
+
+
+        <!-- 12. Weitere Angaben (accordion) -->
+        <div class="form-section accordion-section" id="extraInfoSection">
+          <button type="button" class="accordion-trigger" onclick="toggleAccordion()" aria-expanded="false" aria-controls="accordionBody">
+            <div class="accordion-trigger-left">
+              <span class="section-num">12</span>
+              <span class="accordion-title">Weitere Angaben</span>
+              <span class="accordion-badge">optional</span>
+            </div>
+            <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          <div class="accordion-body" id="accordionBody">
+            <div class="accordion-inner">
+
+              <div class="form-subsection-label">Wie hast Du von uns erfahren?</div>
+              <div class="options-grid">
+                <label class="option-item">
+                  <input type="radio" name="referralSource" value="empfehlung">
+                  <div><strong>Empfehlung von Freunden</strong></div>
+                </label>
+                <label class="option-item">
+                  <input type="radio" name="referralSource" value="social-media">
+                  <div><strong>Social Media</strong><br><span style="font-size:12px; color:var(--text-muted);">Instagram, Facebook u. a.</span></div>
+                </label>
+                <label class="option-item">
+                  <input type="radio" name="referralSource" value="google">
+                  <div><strong>Google / Internet</strong><br><span style="font-size:12px; color:var(--text-muted);">Suche oder Website</span></div>
+                </label>
+                <label class="option-item">
+                  <input type="radio" name="referralSource" value="newsletter">
+                  <div><strong>Newsletter</strong></div>
+                </label>
+                <label class="option-item wide">
+                  <input type="radio" name="referralSource" value="sonstiges">
+                  <div><strong>Sonstiges</strong></div>
+                </label>
+              </div>
+
+              <div class="form-subsection-label" style="margin-top:20px;">Kommentar</div>
+              <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Besondere Wünsche, Fragen oder Hinweise zu Deiner Anmeldung …"></textarea>
+
+            </div>
+          </div>
+        </div>
+        <!-- Datenschutz -->
+        <div class="consent-block" style="margin-top:24px;">
+          <label class="consent-item">
+            <input type="checkbox" name="privacy" id="privacyConsent" required>
+            <span>
+              Ich habe die <a href="#" onclick="return false;">Datenschutzerklärung</a> gelesen und erkläre mich mit
+              der Verarbeitung meiner Daten einverstanden. *
+            </span>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <div class="modal-footer">
+          <p class="footer-note">* Pflichtfelder</p>
+          <button type="submit" class="btn-submit">Probemonat beantragen</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+     ====================================================== -->
+<script>
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+
+  function openModal(group, time, location, coach) {
+    document.getElementById('modalTrainingText').textContent =
+      group + ' · ' + time + ' · ' + location + ' · Trainer: ' + coach;
+    document.getElementById('trialModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('trialModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('trialModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function toggleAccordion() {
+    const trigger = document.querySelector('.accordion-trigger');
+    const body    = document.getElementById('accordionBody');
+    const open    = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', !open);
+    body.classList.toggle('open', !open);
+  }
+
+  function toggleFriendField(label) {
+    const cb = label.querySelector('#friendDiscountCb');
+    setTimeout(() => {
+      document.getElementById('friendNameField').style.display = cb.checked ? 'block' : 'none';
+    }, 0);
+  }
+
+  function toggleDayChip(label) {
+    const cb = label.querySelector('input[type="checkbox"]');
+    setTimeout(() => { label.classList.toggle('checked', cb.checked); }, 0);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    let valid = true;
+
+    form.querySelectorAll('input[required]').forEach(function(field) {
+      if (field.type === 'checkbox' && !field.checked) { valid = false; }
+      else if (field.type === 'radio') {
+        const anyChecked = Array.from(form.querySelectorAll('[name="' + field.name + '"]')).some(r => r.checked);
+        if (!anyChecked) valid = false;
+      } else if (!field.value.trim()) {
+        field.style.borderColor = '#E8601C';
+        valid = false;
+      }
+    });
+
+    if (!valid) return;
+
+    document.querySelector('.modal-body').innerHTML = `
+      <div style="padding:56px 32px; text-align:center;">
+        <div style="width:64px; height:64px; background:var(--primary-light); border-radius:50%;
+          display:flex; align-items:center; justify-content:center; margin:0 auto 22px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)"
+            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h3 style="font-size:20px; font-weight:700; margin-bottom:10px;">Antrag erfolgreich gesendet!</h3>
+        <p style="color:var(--text-sec); font-size:15px; max-width:360px; margin:0 auto 28px; line-height:1.6;">
+          Vielen Dank! Wir melden uns innerhalb von 24 Stunden bei Dir.
+          Wir freuen uns auf Deinen Probemonat!
+        </p>
+        <button class="btn-submit" onclick="closeModal()">Schließen</button>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>

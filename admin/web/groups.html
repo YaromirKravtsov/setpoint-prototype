@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groups — SetPoint Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ======= SIDEBAR ======= -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">🎾</div>
+      <span class="logo-text">SetPoint</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Calendar
+      </a>
+      <a href="customers.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers
+      </a>
+      <a href="team.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 9h5M14 12h5M14 15h5"/></svg>
+        Team
+      </a>
+      <a href="groups.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Groups
+      </a>
+      <a href="locations.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Locations
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+      <div class="sidebar-user">
+        <div class="user-avatar">AD</div>
+        <div class="user-info">
+          <div class="user-name">Admin</div>
+          <div class="user-role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======= MAIN ======= -->
+  <div class="main">
+    <header class="topbar">
+      <span class="topbar-title">Groups</span>
+      <button class="icon-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+      <button class="btn btn-primary" onclick="openGroupModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Group
+      </button>
+    </header>
+
+    <div class="page-content">
+
+      <div style="font-size:13px; color:var(--text-muted);">Groups are tags attached to users and trainings. Drag to reorder.</div>
+
+      <!-- Table -->
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:40px; padding:12px 8px 12px 18px;"></th>
+                <th>Group</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="groupsList">
+
+              <tr class="drag-row" data-id="1">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td><div class="cell-name">Kinder 5+</div></td>
+                <td style="color:var(--text-sec); font-size:13px;">Youngest players aged 5 and above. Focus on coordination, basic strokes and fun play.</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openGroupModal({id:1, title:'Kinder 5+', link:'', desc:'Youngest players aged 5 and above. Focus on coordination, basic strokes and fun play.'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Kinder 5+')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="drag-row" data-id="2">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td><div class="cell-name">Kinder 1+</div></td>
+                <td style="color:var(--text-sec); font-size:13px;">Children aged 8 and above. Introduction to technique, match play basics and footwork.</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openGroupModal({id:2, title:'Kinder 1+', link:'', desc:'Children aged 8 and above. Introduction to technique, match play basics and footwork.'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Kinder 1+')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="drag-row" data-id="3">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td><div class="cell-name">Junior</div></td>
+                <td style="color:var(--text-sec); font-size:13px;">
+                  Teen players aged 12–16. Tactical training, serve development and competitive play preparation.
+                  <a class="list-item-link" href="https://example.com/junior" target="_blank" style="display:inline-flex; margin-top:4px;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    example.com/junior
+                  </a>
+                </td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openGroupModal({id:3, title:'Junior', link:'https://example.com/junior', desc:'Teen players aged 12–16. Tactical training, serve development and competitive play preparation.'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Junior')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="drag-row" data-id="4">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td><div class="cell-name">Erwachsene</div></td>
+                <td style="color:var(--text-sec); font-size:13px;">Adult players of all skill levels. Fitness, technique improvement and social match play.</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openGroupModal({id:4, title:'Erwachsene', link:'', desc:'Adult players of all skill levels. Fitness, technique improvement and social match play.'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Erwachsene')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ======= GROUP MODAL ======= -->
+<div class="modal-overlay" id="groupModal" onclick="if(event.target===this)closeGroupModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="groupModalTitle">Add Group</span>
+      <button class="modal-close" onclick="closeGroupModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" id="gTitle" placeholder="e.g. Kinder 5+">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Link <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--neutral-300);">(optional)</span></label>
+        <input type="url" class="form-control" id="gLink" placeholder="https://…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--neutral-300);">(optional)</span></label>
+        <textarea class="form-control" id="gDesc" placeholder="What this group is about…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeGroupModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeGroupModal()">Save Group</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= DELETE CONFIRM ======= -->
+<div class="modal-overlay" id="deleteModal" onclick="if(event.target===this)closeDeleteModal()">
+  <div class="modal" style="width:360px;">
+    <div class="modal-header">
+      <span class="modal-title">Delete "<span id="deleteItemName"></span>"?</span>
+      <button class="modal-close" onclick="closeDeleteModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:14px; color:var(--text-sec); line-height:1.6;">This group will be permanently removed and unlinked from all trainings and customers.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn btn-primary" style="background:var(--error-500);border-color:var(--error-500);" onclick="closeDeleteModal()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---- Modals ---- */
+function openGroupModal(data) {
+  document.getElementById('groupModalTitle').textContent = data ? 'Edit Group' : 'Add Group';
+  document.getElementById('gTitle').value = data?.title || '';
+  document.getElementById('gLink').value  = data?.link  || '';
+  document.getElementById('gDesc').value  = data?.desc  || '';
+  document.getElementById('groupModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeGroupModal() {
+  document.getElementById('groupModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function confirmDelete(name) {
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeGroupModal(); closeDeleteModal(); }
+});
+
+/* ---- Drag-and-drop ---- */
+const list = document.getElementById('groupsList');
+let dragSrc = null;
+
+function initDnD() {
+  list.querySelectorAll('.drag-row').forEach(item => {
+    const handle = item.querySelector('.drag-handle');
+
+    handle.addEventListener('mousedown', () => item.setAttribute('draggable', 'true'));
+    handle.addEventListener('touchstart', () => item.setAttribute('draggable', 'true'));
+    item.addEventListener('dragend', () => item.removeAttribute('draggable'));
+
+    item.addEventListener('dragstart', e => {
+      dragSrc = item;
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => item.classList.add('is-dragging'), 0);
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('is-dragging');
+      clearIndicators();
+    });
+
+    item.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (!dragSrc || dragSrc === item) return;
+      clearIndicators();
+      const rect = item.getBoundingClientRect();
+      const mid  = rect.top + rect.height / 2;
+      item.classList.add(e.clientY < mid ? 'drag-over-top' : 'drag-over-bottom');
+    });
+
+    item.addEventListener('dragleave', () => clearIndicators());
+
+    item.addEventListener('drop', e => {
+      e.preventDefault();
+      if (!dragSrc || dragSrc === item) return;
+      const rect = item.getBoundingClientRect();
+      const mid  = rect.top + rect.height / 2;
+      list.insertBefore(dragSrc, e.clientY < mid ? item : item.nextSibling);
+      clearIndicators();
+      dragSrc.classList.remove('item-dropped');
+      void dragSrc.offsetWidth;
+      dragSrc.classList.add('item-dropped');
+      dragSrc.addEventListener('animationend', () => dragSrc.classList.remove('item-dropped'), { once: true });
+    });
+  });
+}
+
+function clearIndicators() {
+  list.querySelectorAll('.drag-row').forEach(i => {
+    i.classList.remove('drag-over-top', 'drag-over-bottom');
+  });
+}
+
+initDnD();
+</script>
+</body>
+</html>

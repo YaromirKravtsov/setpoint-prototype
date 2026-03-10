@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar — SetPoint Admin</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    /* Calendar page fills the remaining height */
+    .cal-shell { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.35);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      width: 520px;
+      max-width: calc(100vw - 40px);
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      transform: translateY(12px) scale(.98);
+      transition: transform .2s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-title { font-size: 17px; font-weight: 700; letter-spacing: -.2px; }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 8px; border: none; background: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: background .12s;
+    }
+    .modal-close:hover { background: var(--neutral-50); color: var(--text); }
+
+    .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .5px; color: var(--text-muted);
+    }
+    .form-control {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 14px; font-family: inherit; color: var(--text);
+      background: #fff; outline: none;
+      transition: border-color .15s, box-shadow .15s;
+      width: 100%;
+    }
+    .form-control:focus {
+      border-color: var(--primary-400);
+      box-shadow: 0 0 0 3px rgba(31,178,107,.12);
+    }
+    select.form-control {
+      appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%23a1a1a1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center;
+      padding-right: 36px;
+    }
+    textarea.form-control { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+    .recur-options { display: flex; gap: 8px; }
+    .recur-btn {
+      flex: 1; padding: 9px 12px; border-radius: var(--radius-md);
+      border: 1.5px solid var(--border); background: #fff;
+      font-size: 13px; font-weight: 500; color: var(--text-sec);
+      cursor: pointer; text-align: center; transition: all .12s;
+    }
+    .recur-btn:hover { border-color: var(--primary-300); color: var(--primary-600); }
+    .recur-btn.selected {
+      border-color: var(--primary-500); background: var(--primary-50);
+      color: var(--primary-700); font-weight: 600;
+    }
+    .recur-range { display: none; }
+    .recur-range.open { display: block; }
+
+    .modal-footer {
+      display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ======= SIDEBAR ======= -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">🎾</div>
+      <span class="logo-text">SetPoint</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Calendar
+      </a>
+      <a href="customers.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers
+      </a>
+      <a href="team.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 9h5M14 12h5M14 15h5"/></svg>
+        Team
+      </a>
+      <a href="groups.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Groups
+      </a>
+      <a href="locations.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Locations
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+      <div class="sidebar-user">
+        <div class="user-avatar">AD</div>
+        <div class="user-info">
+          <div class="user-name">Admin</div>
+          <div class="user-role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======= MAIN ======= -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <span class="topbar-title">Calendar</span>
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search…">
+      </div>
+      <button class="icon-btn" title="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+      <button class="icon-btn" title="Profile">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="btn btn-primary" onclick="openModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Training
+      </button>
+    </header>
+
+    <!-- Calendar shell -->
+    <div class="cal-shell">
+
+      <!-- Controls bar -->
+      <div class="calendar-controls">
+        <button class="btn btn-secondary" style="padding: 7px 10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="cal-week-label">Mar 9 – 15, 2026</span>
+        <button class="btn btn-secondary" style="padding: 7px 10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <button class="btn btn-ghost" style="font-size: 13px; padding: 7px 12px;">Today</button>
+
+        <div style="margin-left: auto;"></div>
+
+        <!-- Trainer legend -->
+        <div style="display:flex; align-items:center; gap:14px; font-size:12px;">
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#4f46e5;display:inline-block;"></span> Max Müller</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#0891b2;display:inline-block;"></span> Sarah Koch</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:2px;background:#7c3aed;display:inline-block;"></span> Tom Weber</span>
+          <span style="width:1px;height:16px;background:var(--border);margin:0 4px;"></span>
+          <span style="font-size:11px;color:var(--text-muted);">MTV · PSV · HCH</span>
+        </div>
+
+        <div class="view-tabs">
+          <span class="view-tab">Day</span>
+          <span class="view-tab active">Week</span>
+          <span class="view-tab">Month</span>
+        </div>
+      </div>
+
+      <!-- Calendar grid -->
+      <div class="calendar-wrap">
+        <div class="cal-week-view">
+
+          <!-- Day headers -->
+          <div class="cal-header">
+            <div class="cal-header-spacer"></div>
+            <div class="cal-day-header today">
+              <div class="cal-day-name">Mon</div>
+              <div class="cal-day-num">9</div>
+            </div>
+            <div class="cal-day-header">
+              <div class="cal-day-name">Tue</div>
+              <div class="cal-day-num">10</div>
+            </div>
+            <div class="cal-day-header">
+              <div class="cal-day-name">Wed</div>
+              <div class="cal-day-num">11</div>
+            </div>
+            <div class="cal-day-header">
+              <div class="cal-day-name">Thu</div>
+              <div class="cal-day-num">12</div>
+            </div>
+            <div class="cal-day-header">
+              <div class="cal-day-name">Fri</div>
+              <div class="cal-day-num">13</div>
+            </div>
+            <div class="cal-day-header">
+              <div class="cal-day-name">Sat</div>
+              <div class="cal-day-num">14</div>
+            </div>
+            <div class="cal-day-header">
+              <div class="cal-day-name">Sun</div>
+              <div class="cal-day-num">15</div>
+            </div>
+          </div>
+
+          <!-- Time + day columns -->
+          <div class="cal-body">
+
+            <!-- Time labels col (08:00–20:00) -->
+            <div class="cal-time-col">
+              <div class="cal-time-label">08:00</div>
+              <div class="cal-time-label">09:00</div>
+              <div class="cal-time-label">10:00</div>
+              <div class="cal-time-label">11:00</div>
+              <div class="cal-time-label">12:00</div>
+              <div class="cal-time-label">13:00</div>
+              <div class="cal-time-label">14:00</div>
+              <div class="cal-time-label">15:00</div>
+              <div class="cal-time-label">16:00</div>
+              <div class="cal-time-label">17:00</div>
+              <div class="cal-time-label">18:00</div>
+              <div class="cal-time-label">19:00</div>
+            </div>
+
+            <!-- Mon -->
+            <div class="cal-day-col" style="background:rgba(31,178,107,.03);">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <!-- 09:00–10:30 Kinder | Max -->
+              <div class="cal-event trainer-max" style="top:60px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-09" data-start="09:00" data-end="10:30" data-trainer="Max Müller" data-group="Kinder" data-location="MTV Herrenhausen">
+                <div class="cal-event-group">Kinder</div>
+                <div class="cal-event-trainer">Max Müller</div>
+                <div class="cal-event-meta">09:00–10:30 · MTV Herrenhausen · 8 🎾</div>
+              </div>
+              <!-- 14:00–15:30 Fortgeschrittene | Sarah -->
+              <div class="cal-event trainer-sarah" style="top:360px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-09" data-start="14:00" data-end="15:30" data-trainer="Sarah Koch" data-group="Fortgeschrittene" data-location="PostSportVerein">
+                <div class="cal-event-group">Fortgeschrittene</div>
+                <div class="cal-event-trainer">Sarah Koch</div>
+                <div class="cal-event-meta">14:00–15:30 · PostSportVerein · 6 🎾</div>
+              </div>
+            </div>
+
+            <!-- Tue -->
+            <div class="cal-day-col">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <!-- 10:00–11:30 Erwachsene Anfänger | Tom -->
+              <div class="cal-event trainer-tom" style="top:120px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-10" data-start="10:00" data-end="11:30" data-trainer="Tom Weber" data-group="Erwachsene Anfänger" data-location="HCH">
+                <div class="cal-event-group">Erwachsene Anfänger</div>
+                <div class="cal-event-trainer">Tom Weber</div>
+                <div class="cal-event-meta">10:00–11:30 · HCH · 10 🎾</div>
+              </div>
+              <!-- 17:00–18:00 Kinder | Max -->
+              <div class="cal-event trainer-max" style="top:540px; height:60px;" onclick="openEventModal(this)" data-date="2026-03-10" data-start="17:00" data-end="18:00" data-trainer="Max Müller" data-group="Kinder" data-location="MTV Herrenhausen">
+                <div class="cal-event-group">Kinder</div>
+                <div class="cal-event-trainer">Max Müller</div>
+                <div class="cal-event-meta">17:00–18:00 · MTV Herrenhausen · 5 🎾</div>
+              </div>
+            </div>
+
+            <!-- Wed -->
+            <div class="cal-day-col">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <!-- 09:00–10:00 Kinder | Max -->
+              <div class="cal-event trainer-max" style="top:60px; height:60px;" onclick="openEventModal(this)" data-date="2026-03-11" data-start="09:00" data-end="10:00" data-trainer="Max Müller" data-group="Kinder" data-location="MTV Herrenhausen">
+                <div class="cal-event-group">Kinder</div>
+                <div class="cal-event-trainer">Max Müller</div>
+                <div class="cal-event-meta">09:00–10:00 · MTV Herrenhausen</div>
+              </div>
+              <!-- 15:00–16:30 Fortgeschrittene | Sarah -->
+              <div class="cal-event trainer-sarah" style="top:420px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-11" data-start="15:00" data-end="16:30" data-trainer="Sarah Koch" data-group="Fortgeschrittene" data-location="PostSportVerein">
+                <div class="cal-event-group">Fortgeschrittene</div>
+                <div class="cal-event-trainer">Sarah Koch</div>
+                <div class="cal-event-meta">15:00–16:30 · PostSportVerein · 7 🎾</div>
+              </div>
+            </div>
+
+            <!-- Thu -->
+            <div class="cal-day-col">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <!-- 11:00–12:30 Turniergruppe | Sarah -->
+              <div class="cal-event trainer-sarah" style="top:180px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-12" data-start="11:00" data-end="12:30" data-trainer="Sarah Koch" data-group="Turniergruppe" data-location="PostSportVerein">
+                <div class="cal-event-group">Turniergruppe</div>
+                <div class="cal-event-trainer">Sarah Koch</div>
+                <div class="cal-event-meta">11:00–12:30 · PostSportVerein · 5 🎾</div>
+              </div>
+              <!-- 14:00–15:00 Erwachsene Anfänger | Tom -->
+              <div class="cal-event trainer-tom" style="top:360px; height:60px;" onclick="openEventModal(this)" data-date="2026-03-12" data-start="14:00" data-end="15:00" data-trainer="Tom Weber" data-group="Erwachsene Anfänger" data-location="HCH">
+                <div class="cal-event-group">Erwachsene Anfänger</div>
+                <div class="cal-event-trainer">Tom Weber</div>
+                <div class="cal-event-meta">14:00–15:00 · HCH</div>
+              </div>
+            </div>
+
+            <!-- Fri -->
+            <div class="cal-day-col">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <!-- 09:00–10:30 Kinder | Max -->
+              <div class="cal-event trainer-max" style="top:60px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-13" data-start="09:00" data-end="10:30" data-trainer="Max Müller" data-group="Kinder" data-location="MTV Herrenhausen">
+                <div class="cal-event-group">Kinder</div>
+                <div class="cal-event-trainer">Max Müller</div>
+                <div class="cal-event-meta">09:00–10:30 · MTV Herrenhausen · 8 🎾</div>
+              </div>
+              <!-- 16:00–17:30 Turniergruppe | Tom -->
+              <div class="cal-event trainer-tom" style="top:480px; height:90px;" onclick="openEventModal(this)" data-date="2026-03-13" data-start="16:00" data-end="17:30" data-trainer="Tom Weber" data-group="Turniergruppe" data-location="PostSportVerein">
+                <div class="cal-event-group">Turniergruppe</div>
+                <div class="cal-event-trainer">Tom Weber</div>
+                <div class="cal-event-meta">16:00–17:30 · PostSportVerein · 5 🎾</div>
+              </div>
+            </div>
+
+            <!-- Sat -->
+            <div class="cal-day-col" style="background:rgba(0,0,0,.015);">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <!-- 10:00–12:00 Erwachsene Anfänger | Tom -->
+              <div class="cal-event trainer-tom" style="top:120px; height:120px;" onclick="openEventModal(this)" data-date="2026-03-14" data-start="10:00" data-end="12:00" data-trainer="Tom Weber" data-group="Erwachsene Anfänger" data-location="HCH">
+                <div class="cal-event-group">Erwachsene Anfänger</div>
+                <div class="cal-event-trainer">Tom Weber</div>
+                <div class="cal-event-meta">10:00–12:00 · HCH · 12 🎾</div>
+              </div>
+            </div>
+
+            <!-- Sun -->
+            <div class="cal-day-col" style="background:rgba(0,0,0,.015);">
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+              <div class="cal-hour-slot"></div><div class="cal-hour-slot"></div>
+            </div>
+
+          </div><!-- /.cal-body -->
+        </div><!-- /.cal-week-view -->
+      </div><!-- /.calendar-wrap -->
+
+    </div><!-- /.cal-shell -->
+  </div><!-- /.main -->
+</div><!-- /.app -->
+<!-- ======= ADD TRAINING MODAL ======= -->
+<div class="modal-overlay" id="trainingModal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+
+    <div class="modal-header">
+      <span class="modal-title">Add Training</span>
+      <button class="modal-close" onclick="closeModal()" title="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- Date -->
+      <div class="form-group">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-control" value="2026-03-09">
+      </div>
+
+      <!-- Start / End Time -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Start Time</label>
+          <input type="time" class="form-control" value="09:00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">End Time</label>
+          <input type="time" class="form-control" value="10:30">
+        </div>
+      </div>
+
+      <!-- Coaches (multi-select) -->
+      <div class="form-group">
+        <label class="form-label">Coaches</label>
+        <div class="coach-picker" id="coachPicker">
+          <label class="coach-option">
+            <input type="checkbox" value="max">
+            <div class="coach-option-avatar ca-max">MM</div>
+            <span class="coach-option-name">Max Müller</span>
+            <span class="coach-option-role">Coach</span>
+          </label>
+          <label class="coach-option">
+            <input type="checkbox" value="sarah">
+            <div class="coach-option-avatar ca-sarah">SK</div>
+            <span class="coach-option-name">Sarah Koch</span>
+            <span class="coach-option-role">Coach</span>
+          </label>
+          <label class="coach-option">
+            <input type="checkbox" value="tom">
+            <div class="coach-option-avatar ca-tom">TW</div>
+            <span class="coach-option-name">Tom Weber</span>
+            <span class="coach-option-role">Coach</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Group + Max Players -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Group</label>
+          <select class="form-control" id="fGroup">
+            <option value="" disabled selected>Select group…</option>
+            <option>Kinder 5+</option>
+            <option>Kinder 1+</option>
+            <option>Junior</option>
+            <option>Erwachsene</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Max Players</label>
+          <input type="number" class="form-control" id="fMaxPlayers" placeholder="e.g. 8" min="1" max="99">
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label class="form-label">Location</label>
+        <select class="form-control" id="fLocation">
+          <option value="" disabled selected>Select location…</option>
+          <option>MTV Herrenhausen</option>
+          <option>PostSportVerein</option>
+          <option>HCH</option>
+        </select>
+      </div>
+
+      <!-- Recurring -->
+      <div class="form-group">
+        <label class="form-label">Repeat</label>
+        <div class="recur-options">
+          <button type="button" class="recur-btn selected" onclick="selectRecur(this)">No repeat</button>
+          <button type="button" class="recur-btn" onclick="selectRecur(this)">Weekly</button>
+          <button type="button" class="recur-btn" onclick="selectRecur(this)">Monthly</button>
+        </div>
+      </div>
+      <div class="form-group recur-range" id="recurDateRange">
+        <label class="form-label">Repeat Rule Validity</label>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="repeatStartDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Date</label>
+            <input type="date" class="form-control" id="repeatEndDate">
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label class="form-label">Description <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--neutral-300);">(optional)</span></label>
+        <textarea class="form-control" placeholder="Notes about this training session…"></textarea>
+      </div>
+
+    </div><!-- /.modal-body -->
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Create Training
+      </button>
+    </div>
+
+  </div><!-- /.modal -->
+</div><!-- /.modal-overlay -->
+
+<script>
+  const modal       = document.getElementById('trainingModal');
+  const modalTitle  = modal.querySelector('.modal-title');
+  const fDate       = modal.querySelector('input[type="date"]');
+  const fStart      = modal.querySelector('input[type="time"]:first-of-type');
+  const fEnd        = modal.querySelectorAll('input[type="time"]')[1];
+  const fGroup      = modal.querySelector('#fGroup');
+  const fMaxPlayers = modal.querySelector('#fMaxPlayers');
+  const fLocation   = modal.querySelector('#fLocation');
+  const coachPicker = modal.querySelector('#coachPicker');
+  const recurDateRange = modal.querySelector('#recurDateRange');
+  const repeatStartDate = modal.querySelector('#repeatStartDate');
+  const repeatEndDate = modal.querySelector('#repeatEndDate');
+
+  const coachValues = { 'Max Müller': 'max', 'Sarah Koch': 'sarah', 'Tom Weber': 'tom' };
+
+  function openModal(data) {
+    modal.querySelectorAll('.recur-btn').forEach((b, i) => b.classList.toggle('selected', i === 0));
+    updateRepeatUi();
+    repeatStartDate.value = '';
+    repeatEndDate.value = '';
+
+    if (data) {
+      modalTitle.textContent = 'Edit Training';
+      fDate.value  = data.date  || '';
+      fStart.value = data.start || '';
+      fEnd.value   = data.end   || '';
+      setSelectValue(fGroup,    data.group);
+      setSelectValue(fLocation, data.location);
+      // pre-check coach if known
+      coachPicker.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = data.trainer && cb.value === coachValues[data.trainer];
+      });
+    } else {
+      modalTitle.textContent = 'Add Training';
+      fDate.value  = '2026-03-09';
+      fStart.value = '09:00';
+      fEnd.value   = '10:30';
+      fGroup.selectedIndex    = 0;
+      fLocation.selectedIndex = 0;
+      fMaxPlayers.value = '';
+      coachPicker.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      repeatStartDate.value = fDate.value;
+    }
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function openEventModal(el) {
+    openModal({
+      date:     el.dataset.date,
+      start:    el.dataset.start,
+      end:      el.dataset.end,
+      trainer:  el.dataset.trainer,
+      group:    el.dataset.group,
+      location: el.dataset.location,
+    });
+  }
+
+  function setSelectValue(select, value) {
+    const opt = [...select.options].find(o => o.text === value || o.value === value);
+    if (opt) select.selectedIndex = opt.index;
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === e.currentTarget) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function selectRecur(btn) {
+    btn.closest('.recur-options').querySelectorAll('.recur-btn')
+      .forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    updateRepeatUi();
+  }
+
+  function updateRepeatUi() {
+    const selectedRepeat = modal.querySelector('.recur-btn.selected')?.textContent.trim().toLowerCase();
+    const shouldShowRange = selectedRepeat === 'weekly' || selectedRepeat === 'monthly';
+    recurDateRange.classList.toggle('open', shouldShowRange);
+    repeatStartDate.required = shouldShowRange;
+    repeatEndDate.required = shouldShowRange;
+  }
+</script>
+
+</body>
+</html>

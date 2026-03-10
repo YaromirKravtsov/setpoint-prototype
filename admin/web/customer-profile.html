@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Becker — SetPoint Admin</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ---- Group tag pills ---- */
+    .group-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+      border: 1px solid transparent;
+    }
+    .group-tag-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    .group-tag-erwachsene { background: var(--primary-50); color: var(--primary-700); border-color: var(--primary-100); }
+    .group-tag-erwachsene .group-tag-dot { background: var(--primary-500); }
+    .group-tag-junior     { background: #fffbeb; color: #92400e; border-color: #fde68a; }
+    .group-tag-junior .group-tag-dot     { background: #f59e0b; }
+    .group-tag-kinder-5   { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+    .group-tag-kinder-5 .group-tag-dot   { background: #0891b2; }
+    .group-tag-kinder-1   { background: #eef2ff; color: #3730a3; border-color: #c7d2fe; }
+    .group-tag-kinder-1 .group-tag-dot   { background: #6366f1; }
+
+    /* ---- App detail sections ---- */
+    .app-detail-section { margin-bottom: 20px; }
+    .app-detail-section:last-child { margin-bottom: 0; }
+
+    /* ---- Group picker (modal) ---- */
+    .group-option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 14px; border: 1px solid var(--border);
+      border-radius: var(--radius-md); cursor: pointer;
+      transition: border-color .12s, background .12s; user-select: none;
+    }
+    .group-option:has(input:checked) { border-color: var(--primary-400); background: var(--primary-50); }
+    .group-option:not(:has(input:checked)):hover { border-color: var(--neutral-200); background: var(--bg); }
+    .group-option input[type="checkbox"] {
+      width: 15px; height: 15px; cursor: pointer;
+      accent-color: var(--primary-500); flex-shrink: 0;
+    }
+    .group-option-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .group-option-name  { font-size: 14px; font-weight: 600; }
+    .group-option-desc  { font-size: 12px; color: var(--text-muted); }
+    .group-error        { font-size: 12px; color: var(--error-500); margin-top: 4px; display: none; }
+
+    /* ---- IBAN monospace ---- */
+    .iban-value { font-family: 'SFMono-Regular', Consolas, monospace; font-size: 13px; letter-spacing: .4px; }
+
+    /* ---- App detail accordion ---- */
+    .detail-accordion-trigger {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 18px 24px; background: none; border: none;
+      cursor: pointer; text-align: left; font-family: inherit;
+    }
+    .detail-accordion-trigger:hover { background: var(--bg); }
+    .detail-accordion-body {
+      display: none; padding: 0 24px 20px;
+    }
+    .detail-accordion-body.open { display: block; }
+    .detail-chevron { transition: transform .2s; color: var(--text-muted); flex-shrink: 0; }
+    .detail-accordion-trigger[aria-expanded="true"] .detail-chevron { transform: rotate(180deg); }
+
+    /* Compact field grid inside profile left card */
+    .profile-field-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px;
+    }
+    .profile-field-grid .profile-field { margin: 0; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ======= SIDEBAR ======= -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">🎾</div>
+      <span class="logo-text">SetPoint</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Calendar
+      </a>
+      <a href="customers.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers
+      </a>
+      <a href="team.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 9h5M14 12h5M14 15h5"/></svg>
+        Team
+      </a>
+      <a href="groups.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Groups
+      </a>
+      <a href="locations.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Locations
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+      <div class="sidebar-user">
+        <div class="user-avatar">AD</div>
+        <div class="user-info">
+          <div class="user-name">Admin</div>
+          <div class="user-role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======= MAIN ======= -->
+  <div class="main">
+    <header class="topbar">
+      <span class="topbar-title">Customer Profile</span>
+      <div style="flex:1;"></div>
+      <button class="icon-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+      <button class="btn btn-secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit
+      </button>
+    </header>
+
+    <div class="page-content">
+
+      <nav class="breadcrumb">
+        <a href="customers.html">Customers</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">Anna Becker</span>
+      </nav>
+
+      <div class="profile-grid">
+
+        <!-- ===== LEFT: Customer Info ===== -->
+        <div class="card profile-header-card" style="overflow:hidden;">
+          <div class="profile-avatar">AB</div>
+          <div class="profile-name">Anna Becker</div>
+          <span class="badge badge-trial" style="margin-top:8px;">Trial Month</span>
+
+          <div class="profile-fields">
+
+            <!-- Contact -->
+            <div class="profile-field">
+              <span class="field-label">Email</span>
+              <span class="field-value">anna.becker@email.com</span>
+            </div>
+            <div class="profile-field">
+              <span class="field-label">Phone</span>
+              <span class="field-value">+49 151 1234 5678</span>
+            </div>
+            <div class="profile-field">
+              <span class="field-label">Date of Birth</span>
+              <span class="field-value">May 15, 1992</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Address -->
+            <div class="profile-field">
+              <span class="field-label">Address</span>
+              <span class="field-value">Lister Meile 23</span>
+              <span class="field-value" style="color:var(--text-sec);">30161 Hannover</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Training -->
+            <div class="profile-field">
+              <span class="field-label">Training Group</span>
+              <span class="field-value">Erwachsene</span>
+            </div>
+            <div class="profile-field">
+              <span class="field-label">Training Type</span>
+              <span class="field-value">Advanced Group</span>
+            </div>
+            <div class="profile-field-grid" style="margin-top:0;">
+              <div class="profile-field">
+                <span class="field-label">Frequency</span>
+                <span class="field-value">2× per week</span>
+              </div>
+              <div class="profile-field">
+                <span class="field-label">Time of Day</span>
+                <span class="field-value">Morning</span>
+              </div>
+            </div>
+            <div class="profile-field">
+              <span class="field-label">Preferred Days</span>
+              <span class="field-value">Tuesday, Friday</span>
+            </div>
+            <div class="profile-field">
+              <span class="field-label">Trial Start</span>
+              <span class="field-value">March 2, 2026</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="profile-field">
+              <span class="field-label">Notes</span>
+              <span class="field-value notes">Interested in the Erwachsene group. Plays twice a week. Prefers morning slots.</span>
+            </div>
+          </div>
+
+          <!-- Status change -->
+          <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border-light);">
+            <div class="field-label" style="margin-bottom:8px;">Change Status</div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn btn-secondary" style="font-size:12px; padding:6px 12px;">Application Review</button>
+              <button class="btn btn-secondary" style="font-size:12px; padding:6px 12px; border-color:var(--warning-500); color:var(--warning-600);">Trial Month</button>
+              <button class="btn btn-secondary" style="font-size:12px; padding:6px 12px;">Trial Month Finished</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== RIGHT ===== -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+
+          <!-- Visible Groups -->
+          <div class="card" style="padding:0; overflow:hidden;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 24px; border-bottom:1px solid var(--border-light);">
+              <div>
+                <div style="font-size:15px; font-weight:700;">Visible Groups</div>
+                <div style="font-size:13px; color:var(--text-muted); margin-top:2px;">Groups this customer is allowed to see and join</div>
+              </div>
+              <button class="btn btn-secondary" style="font-size:13px;" onclick="openGroupsModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Edit
+              </button>
+            </div>
+            <div style="padding:18px 24px;">
+              <div id="visibleGroupsTags" style="display:flex; flex-wrap:wrap; gap:8px;">
+                <span class="group-tag group-tag-erwachsene">
+                  <span class="group-tag-dot"></span>Erwachsene
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trial Balance -->
+          <div class="card balance-card">
+            <div class="balance-title">Trial Sessions</div>
+            <div class="balance-stats">
+              <div class="balance-stat">
+                <div class="balance-stat-num">4</div>
+                <div class="balance-stat-label">Total in trial</div>
+              </div>
+              <div class="balance-stat">
+                <div class="balance-stat-num used">1</div>
+                <div class="balance-stat-label">Attended</div>
+              </div>
+              <div class="balance-stat">
+                <div class="balance-stat-num remaining">3</div>
+                <div class="balance-stat-label">Remaining</div>
+              </div>
+            </div>
+            <div class="balance-bar">
+              <div class="balance-bar-fill" style="width:25%;"></div>
+            </div>
+            <div class="balance-bar-note">1 of 4 trial sessions used (25%)</div>
+          </div>
+
+          <!-- Application Details (accordion) -->
+          <div class="card" style="padding:0; overflow:hidden;">
+
+            <button class="detail-accordion-trigger" onclick="toggleAppDetails(this)" aria-expanded="false" aria-controls="appDetailsBody">
+              <div>
+                <div style="font-size:15px; font-weight:700;">Application Details</div>
+                <div style="font-size:13px; color:var(--text-muted); margin-top:2px;">Full submitted form data</div>
+              </div>
+              <svg class="detail-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+
+            <div class="detail-accordion-body" id="appDetailsBody">
+              <div style="border-top:1px solid var(--border-light); padding-top:20px;">
+
+                <!-- Parent / Guardian -->
+                <div class="app-detail-section">
+                  <div class="app-section-title">Parent / Guardian</div>
+                  <div style="display:flex; align-items:center; gap:8px; padding:10px 12px; background:var(--bg); border:1px solid var(--border-light); border-radius:var(--radius-md);">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span style="font-size:13px; color:var(--text-muted);">Not provided — adult applicant</span>
+                  </div>
+                </div>
+
+                <!-- Training Preferences -->
+                <div class="app-detail-section">
+                  <div class="app-section-title">Training Preferences</div>
+                  <div class="app-field-grid">
+                    <div class="app-field">
+                      <span class="field-label">Requested Group</span>
+                      <span class="field-value" style="font-weight:600;">Erwachsene</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">Training Type</span>
+                      <span class="field-value">Advanced Group</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">Tennis Experience</span>
+                      <span class="field-value">Intermediate</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">Frequency</span>
+                      <span class="field-value">2× per week</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">Preferred Time of Day</span>
+                      <span class="field-value">Morning (09:00–12:00)</span>
+                    </div>
+                    <div class="app-field" style="grid-column:1/-1;">
+                      <span class="field-label">Preferred Days</span>
+                      <span class="field-value">Tuesday, Friday</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Add-ons & Extras -->
+                <div class="app-detail-section">
+                  <div class="app-section-title">Add-ons &amp; Extras</div>
+                  <div class="app-field-grid">
+                    <div class="app-field">
+                      <span class="field-label">Selected Options</span>
+                      <span style="font-size:13px; color:var(--text-muted); font-style:italic;">None selected</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">Friend Referral</span>
+                      <span class="field-value" style="color:var(--text-muted);">—</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Banking / SEPA -->
+                <div class="app-detail-section">
+                  <div class="app-section-title">Banking &amp; SEPA Direct Debit</div>
+                  <div class="app-field-grid">
+                    <div class="app-field">
+                      <span class="field-label">Account Holder</span>
+                      <span class="field-value">Anna Becker</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">BIC</span>
+                      <span class="field-value iban-value">COBADEFFXXX</span>
+                    </div>
+                    <div class="app-field" style="grid-column:1/-1;">
+                      <span class="field-label">IBAN</span>
+                      <span class="field-value iban-value">DE12 2004 1010 0505 0015 02</span>
+                    </div>
+                    <div class="app-field" style="grid-column:1/-1;">
+                      <span class="field-label">SEPA Mandate</span>
+                      <div style="display:flex; align-items:center; gap:6px; margin-top:2px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary-600)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span style="font-size:13px; color:var(--primary-700); font-weight:500;">Consent given</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="app-detail-section">
+                  <div class="app-section-title">Additional Information</div>
+                  <div class="app-field-grid">
+                    <div class="app-field">
+                      <span class="field-label">How They Heard About Us</span>
+                      <span class="field-value" style="color:var(--text-sec);">Google / Internet</span>
+                    </div>
+                    <div class="app-field">
+                      <span class="field-label">Submitted</span>
+                      <span class="field-value" style="color:var(--text-sec);">March 1, 2026 at 11:18</span>
+                    </div>
+                    <div class="app-field" style="grid-column:1/-1;">
+                      <span class="field-label">Applicant Message</span>
+                      <span style="font-size:13px; color:var(--text-sec); line-height:1.6; font-style:italic;">"Looking forward to improving my backhand technique and playing more regularly in a friendly group environment."</span>
+                    </div>
+                    <div class="app-field" style="grid-column:1/-1;">
+                      <span class="field-label">Comment</span>
+                      <span style="font-size:13px; color:var(--text-muted); font-style:italic;">No additional comment provided.</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Training History -->
+          <div class="card history-card">
+            <div class="history-title">Trial Session History</div>
+            <div class="history-head">
+              <span>Date</span>
+              <span>Training</span>
+              <span>Status</span>
+              <span>Trainer</span>
+              <span>Feedback</span>
+            </div>
+            <div class="history-timeline">
+              <div class="history-item">
+                <div class="history-date">Mar 7, 2026</div>
+                <div class="history-training">Erwachsene</div>
+                <div><span class="badge badge-attended">Attended</span></div>
+                <div class="history-trainer">Sarah Koch</div>
+                <div class="history-feedback">"Enjoyed the session, wants to continue."</div>
+              </div>
+              <div class="history-item">
+                <div class="history-date">Mar 12, 2026</div>
+                <div class="history-training">Erwachsene</div>
+                <div><span class="badge badge-inactive" style="font-size:11px;">Scheduled</span></div>
+                <div class="history-trainer">Sarah Koch</div>
+                <div class="history-feedback" style="color:var(--text-muted);">—</div>
+              </div>
+              <div class="history-item">
+                <div class="history-date">Mar 14, 2026</div>
+                <div class="history-training">Erwachsene</div>
+                <div><span class="badge badge-inactive" style="font-size:11px;">Scheduled</span></div>
+                <div class="history-trainer">Sarah Koch</div>
+                <div class="history-feedback" style="color:var(--text-muted);">—</div>
+              </div>
+              <div class="history-item">
+                <div class="history-date">Mar 16, 2026</div>
+                <div class="history-training">Erwachsene</div>
+                <div><span class="badge badge-inactive" style="font-size:11px;">Scheduled</span></div>
+                <div class="history-trainer">Sarah Koch</div>
+                <div class="history-feedback" style="color:var(--text-muted);">—</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ======= VISIBLE GROUPS MODAL ======= -->
+<div class="modal-overlay" id="groupsModal" role="dialog" aria-modal="true" aria-labelledby="groupsModalTitle">
+  <div class="modal" style="width:500px;">
+
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="groupsModalTitle">Manage Visible Groups</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:3px;">Choose which groups Anna Becker can see and join.</div>
+      </div>
+      <button class="modal-close" onclick="closeGroupsModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <div style="display:flex; align-items:flex-start; gap:10px; padding:12px 14px; background:var(--bg); border:1px solid var(--border-light); border-radius:var(--radius-md);">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span style="font-size:13px; color:var(--text-sec); line-height:1.55;">
+          Only selected groups will be visible to this customer. At least one group must remain active.
+        </span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;" id="groupPickerList">
+
+        <label class="group-option">
+          <input type="checkbox" name="group" value="kinder-1" id="gp-kinder-1">
+          <span class="group-option-dot" style="background:#6366f1;"></span>
+          <div>
+            <div class="group-option-name">Kinder 1+</div>
+            <div class="group-option-desc">Children from 1 year — beginner sessions</div>
+          </div>
+        </label>
+
+        <label class="group-option">
+          <input type="checkbox" name="group" value="kinder-5" id="gp-kinder-5">
+          <span class="group-option-dot" style="background:#0891b2;"></span>
+          <div>
+            <div class="group-option-name">Kinder 5+</div>
+            <div class="group-option-desc">Children from 5 years — structured technique</div>
+          </div>
+        </label>
+
+        <label class="group-option">
+          <input type="checkbox" name="group" value="junior" id="gp-junior">
+          <span class="group-option-dot" style="background:#f59e0b;"></span>
+          <div>
+            <div class="group-option-name">Junior</div>
+            <div class="group-option-desc">Youth training — competitive focus</div>
+          </div>
+        </label>
+
+        <label class="group-option">
+          <input type="checkbox" name="group" value="erwachsene" id="gp-erwachsene" checked>
+          <span class="group-option-dot" style="background:var(--primary-500);"></span>
+          <div>
+            <div class="group-option-name">Erwachsene</div>
+            <div class="group-option-desc">Adult training — recreational &amp; competitive</div>
+          </div>
+        </label>
+
+      </div>
+
+      <div class="group-error" id="groupError">
+        Please select at least one group.
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeGroupsModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveGroupSelection()">Save Changes</button>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  /* ---- Groups config ---- */
+  var GROUP_CONFIG = {
+    'kinder-1':   { label: 'Kinder 1+',   cls: 'group-tag-kinder-1',   dot: '#6366f1' },
+    'kinder-5':   { label: 'Kinder 5+',   cls: 'group-tag-kinder-5',   dot: '#0891b2' },
+    'junior':     { label: 'Junior',       cls: 'group-tag-junior',     dot: '#f59e0b' },
+    'erwachsene': { label: 'Erwachsene',   cls: 'group-tag-erwachsene', dot: null      },
+  };
+
+  /* ---- Open modal (sync checkboxes from current tags) ---- */
+  function openGroupsModal() {
+    // Reset checkboxes to match current visible groups
+    var current = getCurrentGroupValues();
+    Object.keys(GROUP_CONFIG).forEach(function(val) {
+      var cb = document.getElementById('gp-' + val);
+      if (cb) cb.checked = current.indexOf(val) !== -1;
+    });
+    document.getElementById('groupError').style.display = 'none';
+    document.getElementById('groupsModal').classList.add('open');
+  }
+
+  function closeGroupsModal() {
+    document.getElementById('groupsModal').classList.remove('open');
+  }
+
+  document.getElementById('groupsModal').addEventListener('click', function(e) {
+    if (e.target === this) closeGroupsModal();
+  });
+
+  /* ---- Read current group tags from the DOM ---- */
+  function getCurrentGroupValues() {
+    var tags = document.querySelectorAll('#visibleGroupsTags [data-group]');
+    return Array.from(tags).map(function(t) { return t.dataset.group; });
+  }
+
+  /* ---- Save group selection → update tag list ---- */
+  function saveGroupSelection() {
+    var checked = Array.from(
+      document.querySelectorAll('#groupPickerList input[type="checkbox"]:checked')
+    );
+    if (checked.length === 0) {
+      document.getElementById('groupError').style.display = 'block';
+      return;
+    }
+
+    var container = document.getElementById('visibleGroupsTags');
+    container.innerHTML = '';
+    checked.forEach(function(cb) {
+      var cfg = GROUP_CONFIG[cb.value];
+      var span = document.createElement('span');
+      span.className = 'group-tag ' + cfg.cls;
+      span.dataset.group = cb.value;
+      span.innerHTML =
+        '<span class="group-tag-dot"></span>' + cfg.label;
+      container.appendChild(span);
+    });
+
+    closeGroupsModal();
+  }
+
+  /* ---- Application details accordion ---- */
+  function toggleAppDetails(trigger) {
+    var body = document.getElementById('appDetailsBody');
+    var open = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!open));
+    body.classList.toggle('open', !open);
+  }
+
+  /* ---- Escape key ---- */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeGroupsModal();
+  });
+
+  /* ---- Init: stamp data-group on existing tags so getCurrentGroupValues works ---- */
+  document.querySelectorAll('#visibleGroupsTags .group-tag').forEach(function(tag) {
+    var cls = Array.from(tag.classList).find(function(c) { return c.startsWith('group-tag-') && c !== 'group-tag'; });
+    if (cls) tag.dataset.group = cls.replace('group-tag-', '');
+  });
+</script>
+
+</body>
+</html>

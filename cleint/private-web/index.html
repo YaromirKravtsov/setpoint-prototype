@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meine Trainings — SetPoint</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======= TOPBAR ======= -->
+<header class="topbar">
+  <a href="index.html" class="topbar-logo">
+    <span class="topbar-logo-mark">🎾</span>
+    <span class="topbar-logo-text">SetPoint</span>
+  </a>
+  <div class="account-wrap">
+    <button class="account-btn" onclick="toggleAccount()" aria-label="Account-Menü" aria-expanded="false" id="accountBtn">
+      <div class="avatar">AB</div>
+      <span class="account-btn-name">Anna Becker</span>
+      <svg class="account-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="account-menu" id="accountMenu">
+      <div class="account-menu-header">
+        <strong>Anna Becker</strong>
+        <span>anna.becker@email.com</span>
+      </div>
+      <a href="my-info.html" class="account-menu-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Meine Daten
+      </a>
+      <a href="my-trainings.html" class="account-menu-item active">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Meine Trainings
+      </a>
+      <div class="account-menu-divider"></div>
+      <a href="login.html" class="account-menu-item account-menu-logout">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Abmelden
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ======= TRIAL STRIP ======= -->
+<div class="trial-strip">
+  <div class="trial-strip-inner">
+    <div class="trial-info">
+      <span class="trial-badge">Probemonat</span>
+      <span class="trial-dates">2. – 29. März 2026</span>
+    </div>
+    <div class="trial-counters">
+      <div class="trial-counter">
+        <span class="trial-counter-num" id="cnt-attended">1</span>
+        <span class="trial-counter-label">absolviert</span>
+      </div>
+      <div class="trial-counter">
+        <span class="trial-counter-num" id="cnt-booked">1</span>
+        <span class="trial-counter-label">gebucht</span>
+      </div>
+      <div class="trial-counter">
+        <span class="trial-counter-num highlight" id="cnt-remaining">2</span>
+        <span class="trial-counter-label">verbleibend</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MAIN CONTENT ======= -->
+<div class="page-wrap">
+  <div class="content">
+
+    <div class="page-header">
+      <h1 class="page-title">Verfügbare Trainings</h1>
+      <p class="page-sub">Probemonat · bis zu 4 Trainings buchbar</p>
+    </div>
+
+    <!-- ── Diese Woche: 9.–15. März ── -->
+    <div class="week-divider">Diese Woche · 9.–15. März</div>
+
+    <!-- Dienstag 10. März (HEUTE) -->
+    <div class="day-section today">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Dienstag</span>
+        <span class="day-date">10. März</span>
+        <span class="day-today-pill">Heute</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-tue10">
+          <div class="slot-time">
+            18:00
+            <span class="slot-time-end">– 19:30</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Igor Gorovits
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 1
+            </div>
+          </div>
+          <div class="slot-action" id="action-tue10">
+            <button class="btn-book" onclick="bookSlot('tue10')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mittwoch 11. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Mittwoch</span>
+        <span class="day-date">11. März</span>
+      </div>
+      <div class="slots-list">
+        <!-- Already booked — within 24h window for demo -->
+        <div class="slot-card" id="slot-wed11">
+          <div class="slot-time">
+            17:00
+            <span class="slot-time-end">– 18:30</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Sarah Klein
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 2
+            </div>
+          </div>
+          <div class="slot-action" id="action-wed11">
+            <!-- Pre-booked slot -->
+            <div class="booked-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Gebucht
+            </div>
+            <button class="btn-cancel" onclick="openCancelDialog('wed11')">Stornieren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donnerstag 12. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Donnerstag</span>
+        <span class="day-date">12. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-thu12">
+          <div class="slot-time">
+            18:30
+            <span class="slot-time-end">– 20:00</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Max Illi
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 1
+            </div>
+          </div>
+          <div class="slot-action" id="action-thu12">
+            <button class="btn-book" onclick="bookSlot('thu12')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Samstag 14. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Samstag</span>
+        <span class="day-date">14. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-sat14">
+          <div class="slot-time">
+            09:00
+            <span class="slot-time-end">– 10:30</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Marianna Gorovits
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Außenplatz
+            </div>
+          </div>
+          <div class="slot-action" id="action-sat14">
+            <button class="btn-book" onclick="bookSlot('sat14')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Nächste Woche: 16.–22. März ── -->
+    <div class="week-divider">Nächste Woche · 16.–22. März</div>
+
+    <!-- Dienstag 17. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Dienstag</span>
+        <span class="day-date">17. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-tue17">
+          <div class="slot-time">
+            18:00
+            <span class="slot-time-end">– 19:30</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Igor Gorovits
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 1
+            </div>
+          </div>
+          <div class="slot-action" id="action-tue17">
+            <button class="btn-book" onclick="bookSlot('tue17')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donnerstag 19. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Donnerstag</span>
+        <span class="day-date">19. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-thu19">
+          <div class="slot-time">
+            18:30
+            <span class="slot-time-end">– 20:00</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Max Illi
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 1
+            </div>
+          </div>
+          <div class="slot-action" id="action-thu19">
+            <button class="btn-book" onclick="bookSlot('thu19')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Samstag 21. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Samstag</span>
+        <span class="day-date">21. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-sat21">
+          <div class="slot-time">
+            09:00
+            <span class="slot-time-end">– 10:30</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Marianna Gorovits
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Außenplatz
+            </div>
+          </div>
+          <div class="slot-action" id="action-sat21">
+            <button class="btn-book" onclick="bookSlot('sat21')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Übernächste Woche: 23.–29. März ── -->
+    <div class="week-divider">23.–29. März</div>
+
+    <!-- Dienstag 24. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Dienstag</span>
+        <span class="day-date">24. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-tue24">
+          <div class="slot-time">
+            18:00
+            <span class="slot-time-end">– 19:30</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Igor Gorovits
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 1
+            </div>
+          </div>
+          <div class="slot-action" id="action-tue24">
+            <button class="btn-book" onclick="bookSlot('tue24')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donnerstag 26. März -->
+    <div class="day-section">
+      <div class="day-header"><div class="day-divider-line"></div>
+        <span class="day-name">Donnerstag</span>
+        <span class="day-date">26. März</span>
+      </div>
+      <div class="slots-list">
+        <div class="slot-card" id="slot-thu26">
+          <div class="slot-time">
+            18:30
+            <span class="slot-time-end">– 20:00</span>
+          </div>
+          <div class="slot-info">
+            <div class="slot-name">Gruppentraining Erwachsene</div>
+            <div class="slot-meta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              Max Illi
+              <span class="slot-meta-sep">·</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Halle 1
+            </div>
+          </div>
+          <div class="slot-action" id="action-thu26">
+            <button class="btn-book" onclick="bookSlot('thu26')">Buchen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======= CANCEL DIALOG ======= -->
+<div class="dialog-overlay" id="cancelDialog" onclick="handleOverlayClick(event)">
+  <div class="dialog">
+    <div class="dialog-handle"></div>
+    <h2 class="dialog-title">Training stornieren?</h2>
+    <p class="dialog-training" id="dialogTraining">—</p>
+    <div class="dialog-rule" id="dialogRule">—</div>
+    <div class="dialog-actions">
+      <button class="btn-ghost" onclick="closeCancelDialog()">Abbrechen</button>
+      <button class="btn-danger" onclick="confirmCancel()">Stornieren</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── State ──
+  const state = {
+    total:    4,
+    attended: 1,
+    booked:   ['wed11'], // initially one pre-booked slot
+
+    slots: {
+      tue10: { label: 'Di, 10. März · 18:00 – 19:30',  name: 'Gruppentraining Erwachsene', coach: 'Igor Gorovits',     loc: 'Halle 1',      within24h: true  },
+      wed11: { label: 'Mi, 11. März · 17:00 – 18:30',  name: 'Gruppentraining Erwachsene', coach: 'Sarah Klein',       loc: 'Halle 2',      within24h: false },
+      thu12: { label: 'Do, 12. März · 18:30 – 20:00',  name: 'Gruppentraining Erwachsene', coach: 'Max Illi',          loc: 'Halle 1',      within24h: false },
+      sat14: { label: 'Sa, 14. März · 09:00 – 10:30',  name: 'Gruppentraining Erwachsene', coach: 'Marianna Gorovits', loc: 'Außenplatz',   within24h: false },
+      tue17: { label: 'Di, 17. März · 18:00 – 19:30',  name: 'Gruppentraining Erwachsene', coach: 'Igor Gorovits',     loc: 'Halle 1',      within24h: false },
+      thu19: { label: 'Do, 19. März · 18:30 – 20:00',  name: 'Gruppentraining Erwachsene', coach: 'Max Illi',          loc: 'Halle 1',      within24h: false },
+      sat21: { label: 'Sa, 21. März · 09:00 – 10:30',  name: 'Gruppentraining Erwachsene', coach: 'Marianna Gorovits', loc: 'Außenplatz',   within24h: false },
+      tue24: { label: 'Di, 24. März · 18:00 – 19:30',  name: 'Gruppentraining Erwachsene', coach: 'Igor Gorovits',     loc: 'Halle 1',      within24h: false },
+      thu26: { label: 'Do, 26. März · 18:30 – 20:00',  name: 'Gruppentraining Erwachsene', coach: 'Max Illi',          loc: 'Halle 1',      within24h: false },
+    }
+  };
+
+  function remaining() {
+    return state.total - state.attended - state.booked.length;
+  }
+
+  function updateCounters() {
+    document.getElementById('cnt-attended').textContent  = state.attended;
+    document.getElementById('cnt-booked').textContent    = state.booked.length;
+    document.getElementById('cnt-remaining').textContent = remaining();
+    // Re-render all available slots so disabled state is correct
+    Object.keys(state.slots).forEach(id => {
+      if (!state.booked.includes(id)) renderSlot(id);
+    });
+  }
+
+  function renderSlot(slotId) {
+    const actionEl = document.getElementById('action-' + slotId);
+    if (!actionEl) return;
+    const isBooked = state.booked.includes(slotId);
+
+    if (isBooked) {
+      actionEl.innerHTML = `
+        <div class="booked-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Gebucht
+        </div>
+        <button class="btn-cancel" onclick="openCancelDialog('${slotId}')">Stornieren</button>
+      `;
+    } else {
+      const disabled = remaining() <= 0;
+      actionEl.innerHTML = `
+        <button class="btn-book" ${disabled ? 'disabled' : `onclick="bookSlot('${slotId}')"`}>
+          ${disabled ? 'Ausgebucht' : 'Buchen'}
+        </button>
+      `;
+    }
+  }
+
+  function bookSlot(slotId) {
+    if (remaining() <= 0) return;
+    state.booked.push(slotId);
+    renderSlot(slotId);
+    updateCounters();
+  }
+
+  // Cancel dialog
+  let pendingCancel = null;
+
+  function openCancelDialog(slotId) {
+    pendingCancel = slotId;
+    const slot = state.slots[slotId];
+    document.getElementById('dialogTraining').textContent = slot.label + ' · ' + slot.coach + ' · ' + slot.loc;
+
+    const ruleEl = document.getElementById('dialogRule');
+    if (slot.within24h) {
+      ruleEl.className = 'dialog-rule warn';
+      ruleEl.innerHTML = '⚠️ <strong>Weniger als 24 Stunden</strong> bis zum Training — das Training wird trotzdem als genutzt gewertet und von Deinem Kontingent abgezogen.';
+    } else {
+      ruleEl.className = 'dialog-rule';
+      ruleEl.innerHTML = 'Da Du mehr als 24 Stunden vor dem Training stornierst, wird dieses Training <strong>nicht als genutzt gewertet</strong> und bleibt in Deinem Kontingent.';
+    }
+    document.getElementById('cancelDialog').classList.add('open');
+  }
+
+  function closeCancelDialog() {
+    document.getElementById('cancelDialog').classList.remove('open');
+    pendingCancel = null;
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === e.currentTarget) closeCancelDialog();
+  }
+
+  function confirmCancel() {
+    if (!pendingCancel) return;
+    const slot = state.slots[pendingCancel];
+    // If within 24h, it still counts as a used session
+    if (slot.within24h) state.attended++;
+    state.booked = state.booked.filter(id => id !== pendingCancel);
+    renderSlot(pendingCancel);
+    updateCounters();
+    closeCancelDialog();
+  }
+
+  // Account menu toggle
+  function toggleAccount() {
+    const menu = document.getElementById('accountMenu');
+    const btn  = document.getElementById('accountBtn');
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.account-wrap')) {
+      document.getElementById('accountMenu').classList.remove('open');
+      document.getElementById('accountBtn').setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+</body>
+</html>

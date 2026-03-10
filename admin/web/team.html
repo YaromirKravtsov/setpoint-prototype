@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team — SetPoint Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ======= SIDEBAR ======= -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">🎾</div>
+      <span class="logo-text">SetPoint</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Calendar
+      </a>
+      <a href="customers.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Customers
+      </a>
+      <a href="team.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.5"/><path d="M14 9h5M14 12h5M14 15h5"/></svg>
+        Team
+      </a>
+      <a href="groups.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        Groups
+      </a>
+      <a href="locations.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Locations
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </a>
+      <div class="sidebar-user">
+        <div class="user-avatar">AD</div>
+        <div class="user-info">
+          <div class="user-name">Admin</div>
+          <div class="user-role">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======= MAIN ======= -->
+  <div class="main">
+    <header class="topbar">
+      <span class="topbar-title">Team</span>
+      <button class="icon-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+      <button class="btn btn-primary" onclick="openMemberModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add Member
+      </button>
+    </header>
+
+    <div class="page-content">
+
+      <div style="font-size:13px; color:var(--text-muted);">Coaches are selectable when scheduling training sessions. Drag to reorder.</div>
+
+      <!-- Table -->
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:40px; padding:12px 8px 12px 18px;"></th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="teamList">
+
+              <!-- Max Müller -->
+              <tr class="drag-row" data-id="1">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="member-avatar" style="background:var(--trainer-max-bg); color:var(--trainer-max-fg);">MM</div>
+                    <div>
+                      <div class="cell-name">Max Müller</div>
+                      <span class="role-badge role-badge-coach" style="margin-top:3px; display:inline-flex;">Coach</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="color:var(--text-sec);">+49 151 2233 4455</td>
+                <td style="color:var(--text-sec);">max.mueller@setpoint.de</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openMemberModal({id:1, firstName:'Max', lastName:'Müller', phone:'+49 151 2233 4455', email:'max.mueller@setpoint.de', role:'Coach'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Max Müller')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Sarah Koch -->
+              <tr class="drag-row" data-id="2">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="member-avatar" style="background:var(--trainer-sarah-bg); color:var(--trainer-sarah-fg);">SK</div>
+                    <div>
+                      <div class="cell-name">Sarah Koch</div>
+                      <span class="role-badge role-badge-coach" style="margin-top:3px; display:inline-flex;">Coach</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="color:var(--text-sec);">+49 152 6677 8899</td>
+                <td style="color:var(--text-sec);">sarah.koch@setpoint.de</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openMemberModal({id:2, firstName:'Sarah', lastName:'Koch', phone:'+49 152 6677 8899', email:'sarah.koch@setpoint.de', role:'Coach'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Sarah Koch')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Tom Weber -->
+              <tr class="drag-row" data-id="3">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="member-avatar" style="background:var(--trainer-tom-bg); color:var(--trainer-tom-fg);">TW</div>
+                    <div>
+                      <div class="cell-name">Tom Weber</div>
+                      <span class="role-badge role-badge-coach" style="margin-top:3px; display:inline-flex;">Coach</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="color:var(--text-sec);">+49 170 3344 1122</td>
+                <td style="color:var(--text-sec);">tom.weber@setpoint.de</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openMemberModal({id:3, firstName:'Tom', lastName:'Weber', phone:'+49 170 3344 1122', email:'tom.weber@setpoint.de', role:'Coach'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Tom Weber')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Admin User -->
+              <tr class="drag-row" data-id="4">
+                <td style="padding:14px 8px 14px 18px;">
+                  <div class="drag-handle" title="Drag to reorder">
+                    <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="2" cy="8" r="1.5"/><circle cx="8" cy="8" r="1.5"/><circle cx="2" cy="14" r="1.5"/><circle cx="8" cy="14" r="1.5"/></svg>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <div class="member-avatar" style="background:var(--primary-100); color:var(--primary-700);">AD</div>
+                    <div>
+                      <div class="cell-name">Admin</div>
+                      <span class="role-badge role-badge-admin" style="margin-top:3px; display:inline-flex;">Admin</span>
+                    </div>
+                  </div>
+                </td>
+                <td style="color:var(--text-sec);">+49 511 9000 0001</td>
+                <td style="color:var(--text-sec);">admin@setpoint.de</td>
+                <td>
+                  <div class="list-item-actions">
+                    <button class="btn btn-secondary" style="font-size:13px; padding:7px 14px;" onclick="openMemberModal({id:4, firstName:'Admin', lastName:'', phone:'+49 511 9000 0001', email:'admin@setpoint.de', role:'Admin'})">Edit</button>
+                    <button class="btn btn-ghost" style="color:var(--error-500); padding:8px 10px;" onclick="confirmDelete('Admin')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ======= MEMBER MODAL ======= -->
+<div class="modal-overlay" id="memberModal" onclick="if(event.target===this)closeMemberModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="memberModalTitle">Add Member</span>
+      <button class="modal-close" onclick="closeMemberModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" id="mFirst" placeholder="e.g. Max">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="mLast" placeholder="e.g. Müller">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="tel" class="form-control" id="mPhone" placeholder="+49 …">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" id="mEmail" placeholder="name@setpoint.de">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Role</label>
+        <select class="form-control" id="mRole">
+          <option value="Coach">Coach</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeMemberModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeMemberModal()">Save Member</button>
+    </div>
+  </div>
+</div>
+
+<!-- ======= DELETE CONFIRM ======= -->
+<div class="modal-overlay" id="deleteModal" onclick="if(event.target===this)closeDeleteModal()">
+  <div class="modal" style="width:360px;">
+    <div class="modal-header">
+      <span class="modal-title">Remove "<span id="deleteItemName"></span>"?</span>
+      <button class="modal-close" onclick="closeDeleteModal()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:14px; color:var(--text-sec); line-height:1.6;">This team member will be permanently removed from the system.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn btn-primary" style="background:var(--error-500);border-color:var(--error-500);" onclick="closeDeleteModal()">Remove</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---- Modals ---- */
+function openMemberModal(data) {
+  document.getElementById('memberModalTitle').textContent = data ? 'Edit Member' : 'Add Member';
+  document.getElementById('mFirst').value  = data?.firstName || '';
+  document.getElementById('mLast').value   = data?.lastName  || '';
+  document.getElementById('mPhone').value  = data?.phone     || '';
+  document.getElementById('mEmail').value  = data?.email     || '';
+  const roleEl = document.getElementById('mRole');
+  roleEl.value = data?.role || 'Coach';
+  document.getElementById('memberModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMemberModal() {
+  document.getElementById('memberModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function confirmDelete(name) {
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeMemberModal(); closeDeleteModal(); }
+});
+
+/* ---- Drag-and-drop ---- */
+const list = document.getElementById('teamList');
+let dragSrc = null;
+
+function initDnD() {
+  list.querySelectorAll('.drag-row').forEach(item => {
+    const handle = item.querySelector('.drag-handle');
+
+    handle.addEventListener('mousedown', () => item.setAttribute('draggable', 'true'));
+    item.addEventListener('dragend', () => item.removeAttribute('draggable'));
+
+    item.addEventListener('dragstart', e => {
+      dragSrc = item;
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => item.classList.add('is-dragging'), 0);
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('is-dragging');
+      clearIndicators();
+    });
+
+    item.addEventListener('dragover', e => {
+      e.preventDefault();
+      if (!dragSrc || dragSrc === item) return;
+      clearIndicators();
+      const mid = item.getBoundingClientRect().top + item.offsetHeight / 2;
+      item.classList.add(e.clientY < mid ? 'drag-over-top' : 'drag-over-bottom');
+    });
+
+    item.addEventListener('dragleave', clearIndicators);
+
+    item.addEventListener('drop', e => {
+      e.preventDefault();
+      if (!dragSrc || dragSrc === item) return;
+      const mid = item.getBoundingClientRect().top + item.offsetHeight / 2;
+      list.insertBefore(dragSrc, e.clientY < mid ? item : item.nextSibling);
+      clearIndicators();
+      dragSrc.classList.remove('item-dropped');
+      void dragSrc.offsetWidth;
+      dragSrc.classList.add('item-dropped');
+      dragSrc.addEventListener('animationend', () => dragSrc.classList.remove('item-dropped'), { once: true });
+    });
+  });
+}
+
+function clearIndicators() {
+  list.querySelectorAll('.drag-row').forEach(i =>
+    i.classList.remove('drag-over-top', 'drag-over-bottom'));
+}
+
+initDnD();
+</script>
+</body>
+</html>
